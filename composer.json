@@ -1,0 +1,22 @@
+{
+    "name": "javichito/lyricfy",
+    "description": "Song lyrics for your PHP apps",
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Javier Hidalgo",
+            "email": "hola@soyjavierhidalgo.com"
+        }
+    ],
+
+    "require": {
+        "sunra/php-simple-html-dom-parser": "v1.5.0"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "php-vcr/php-vcr": "dev-master",
+        "php-vcr/phpunit-testlistener-vcr": "*"
+    }
+}
