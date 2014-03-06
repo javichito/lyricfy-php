@@ -1,5 +1,4 @@
-<?php
-namespace Javichitone\Lyricfy;
+<?php namespace Javichitone\Lyricfy;
 
 use Javichitone\Lyricfy\Song;
 use Javichitone\Lyricfy\Providers\Wikia;
@@ -11,17 +10,33 @@ class Fetcher
 
   function __construct()
   {
-    $this->providers = array(
-      'wikia' => Wikia,
-      'metro_lyrics' => MetroLyrics
-    );
+    $this->providers = array('wikia', 'metro_lyrics');
+
+    if ($providers = func_get_args()) {
+      foreach ($providers as $provider) {
+        if (!in_array($provider, $this->providers)) {
+          throw new \Exception();
+        }
+      }
+      $this->providers = $providers;
+    }
+  }
+
+  public function getProviders()
+  {
+    return $this->providers;
   }
 
   public function search($artist, $song)
   {
+    if (!isset($artist) || !isset($song)) {
+      throw new \Exception();
+    }
+
     $key = strtolower($artist) . "-" . strtolower($song);
 
-    foreach ($this->providers as $provider => $klass) {
+    foreach ($this->providers as $provider) {
+      $klass = '\Javichitone\Lyricfy\Providers\\' . $this->camelize($provider);
       $fetcher = new $klass(array(
           'artist_name' => $artist,
           'song_name'   => $song
@@ -33,5 +48,10 @@ class Fetcher
     }
 
     return NULL;
+  }
+
+  private function camelize($string)
+  {
+    return str_replace(" ", "", ucfirst( implode( " ", explode("_", $string) ) ));
   }
 }
