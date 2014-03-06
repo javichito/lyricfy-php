@@ -45,7 +45,7 @@ class Provider
   public function search()
   {
     try {
-      return file_get_contents(urldecode($this->url));
+      return @file_get_contents(urldecode($this->url));
     }
     catch(Exception $e) {
       return NULL;
