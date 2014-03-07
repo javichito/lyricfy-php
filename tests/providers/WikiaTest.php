@@ -14,7 +14,7 @@ class WikiaTest extends \PHPUnit_Framework_Testcase
   }
 
   /**
-   * @vcr wikia_404.yml
+   * vcr wikia_404.yml
    */
   function testReturnNullWhenNotFound()
   {
@@ -38,7 +38,7 @@ class WikiaTest extends \PHPUnit_Framework_Testcase
   }
 
   /**
-   * @vcr wikia_200.yml
+   * vcr wikia_200.yml
    */
   function testReturnLyricsWithoutHtmlTags()
   {
